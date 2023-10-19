@@ -17,7 +17,8 @@ jobs:
         run: npm run test
   build:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  gamma 4
+
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -25,6 +26,13 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-file
+          path: |
+            dist
+            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
